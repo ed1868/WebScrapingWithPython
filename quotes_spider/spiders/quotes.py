@@ -8,4 +8,10 @@ class QuotesSpider(scrapy.Spider):
     start_urls = ['http://quotes.toscrape.com/']
 
     def parse(self, response):
-        pass
+        header = response.xpath('//h1/a/text()').extract()
+        tags =response.xpath('//*[@class="tag-item"]/a/text()')
+        
+        yield{
+            'Header' : header,
+            'Tags' : tags 
+        }
